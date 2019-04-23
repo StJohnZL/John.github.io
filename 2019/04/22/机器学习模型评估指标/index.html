@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="St.John&#39;Blog">
 <meta property="og:description" content="评价指标(Evaluation metrics)  评价指标是机器学习任务中非常重要的一环。不同的机器学习任务有着不同的评价指标，同时同一种机器学习任务也有着不同的评价指标，每个指标的着重点不一样。如分类（classification）、回归（regression）、排序（ranking）、聚类（clustering）、热门主题模型（topic modeling）、推荐（recommendatio">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-23T07:47:37.166Z">
+<meta property="og:updated_time" content="2019-04-23T07:49:21.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习模型评估指标">
 <meta name="twitter:description" content="评价指标(Evaluation metrics)  评价指标是机器学习任务中非常重要的一环。不同的机器学习任务有着不同的评价指标，同时同一种机器学习任务也有着不同的评价指标，每个指标的着重点不一样。如分类（classification）、回归（regression）、排序（ranking）、聚类（clustering）、热门主题模型（topic modeling）、推荐（recommendatio">
@@ -248,8 +248,8 @@
 <p>  在推荐系统中，它相当于一个多兴趣查询，即每个用户是一个查询词，然后返回每个查询词相关的top k项目，即返回每个用户感兴趣的top k项目，那么在计算评价指标值时，则需要对每个用户的精确率与召回率进行平均(average precision@k” and “average recall@k”)，将平均值作为模型的精确率与召回率。 </p>
 <p>* Precision-Recall Curve和F1 Score </p>
 <p>  当我们改变top k中的k值时，便可以得到不同的精确率与召回率，那么我们可以通过改变k值而得到精确率曲线和召回率曲线。与ROC曲线一样，我们也需要一个定量的指标对其ROC曲线进行描述而来评价其对应的模型进行评价。可取多个k值，然后计算其评价的精确率与召回率。 </p>
-<p>  除了Precision-Recall曲线外，另一个便是F1 Score，在分类器评价指标中也有提及到，它将精确度与召回率两个指标结合起来，如下： <script type="math/tex">F\_1 = \frac{2*precison*recall}{precision+recall}</script></p>
-<p>F1-score是精确率与召回率的调和平均值，它的值更接近于Precision与Recall中较小的值。 </p>
+<p>  除了Precision-Recall曲线外，另一个便是F1 Score，在分类器评价指标中也有提及到，它将精确度与召回率两个指标结合起来，如下： </p>
+<script type="math/tex; mode=display">F\_1 = \frac{2*precison*recall}{precision+recall}</script><p>F1-score是精确率与召回率的调和平均值，它的值更接近于Precision与Recall中较小的值。 </p>
 <p>* NDCG </p>
 <p>  在精确率与召回率中，返回集中每个项目的地位（权值）是一样，即位置k处的项目与位置1处的项目地位一样，但是实际情况应该是越排在前面的项目越相关，得分越高。NDCG（normalized discounted cumulative gain）指标便考虑了这种情况，在介绍NDCG之前，首先介绍一下CG(cumulative gain与DCG(discounted cumulative gain)。CG是对排序返回的top k个项目的相关性（即得分）求和，而DCG在每个项目的得分乘上一个权值，该权值与位置成反方向（如成反比），即位置越近，权值越大。而NDCG则对每项的带权值得分先进行归一化，然后再求和。 </p>
 <p>  在信息检索中或者那些对项目的返回位置关心的模型中经常使用DCG或NDCG。</p>
