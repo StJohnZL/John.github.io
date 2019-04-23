@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="St.John&#39;Blog">
 <meta property="og:description" content="评价指标(Evaluation metrics)  评价指标是机器学习任务中非常重要的一环。不同的机器学习任务有着不同的评价指标，同时同一种机器学习任务也有着不同的评价指标，每个指标的着重点不一样。如分类（classification）、回归（regression）、排序（ranking）、聚类（clustering）、热门主题模型（topic modeling）、推荐（recommendatio">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-23T07:21:45.464Z">
+<meta property="og:updated_time" content="2019-04-23T07:43:32.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习模型评估指标">
 <meta name="twitter:description" content="评价指标(Evaluation metrics)  评价指标是机器学习任务中非常重要的一环。不同的机器学习任务有着不同的评价指标，同时同一种机器学习任务也有着不同的评价指标，每个指标的着重点不一样。如分类（classification）、回归（regression）、排序（ranking）、聚类（clustering）、热门主题模型（topic modeling）、推荐（recommendatio">
@@ -184,8 +184,8 @@
 <p>​         <script type="math/tex">accuracy = \frac{n_{correct}}{n_{total}}​</script></p>
 <p>  准确率看起来非常简单。然而，准确率评价指标没有对不同类别进行区分，即其平等对待每个类别。但是这种评价有时是不够的，比如有时要看类别0与类别1下分类错误的各自个数，因为不同类别下分类错误的代价不同，即对不同类别的偏向不同，比如有句话为“宁可错杀一万，不可放过一千“就是这个道理，例如在病患诊断中，诊断患有癌症实际上却未患癌症（False Positive）与诊断未患有癌症的实际上却患有癌症（False Negative）的这两种情况的重要性不一样。。另一个原因是，可能数据分布不平衡，即有的类别下的样本过多，有的类别下的样本个数过少，两类个数相差较大。这样，样本占大部分的类别主导了准确率的计算，为了解决这个问题，对准确率进行改进，得到平均准确率。</p>
 <h5 id="平均准确率-Average-Per-class-Accuracy"><a href="#平均准确率-Average-Per-class-Accuracy" class="headerlink" title="平均准确率(Average Per-class Accuracy)"></a>平均准确率(Average Per-class Accuracy)</h5><p>  为了应对每个类别下样本的个数不一样的情况，对准确率进行变种，计算每个类别下的准确率，然后再计算它们的平均值。举例，类别0的准确率为80%，类别1下的准确率为97.5%，那么平均准确率为(80%+97.5%)/2=88.75%。因为每个类别下类别的样本个数不一样，即计算每个类别的准确率时，分母不一样，则平均准确率不等于准确率，如果每个类别下的样本个数一样，则平均准确率与准确率相等。<br>  平均准确率也有自己的缺点，比如，如果存在某个类别，类别的样本个数很少，那么使用测试集进行测试时（如k-fold cross validation），可能造成该类别准确率的方差过大，意味着该类别的准确率可靠性不强。</p>
-<h5 id="对数损失函数-Log-loss"><a href="#对数损失函数-Log-loss" class="headerlink" title="对数损失函数(Log-loss)"></a>对数损失函数(Log-loss)</h5><p>  在分类输出中，若输出不再是0-1，而是实数值，即属于每个类别的概率，那么可以使用Log-loss对分类结果进行评价。这个输出概率表示该记录所属的其对应的类别的置信度。比如如果样本本属于类别0，但是分类器则输出其属于类别1的概率为0.51，那么这种情况认为分类器出错了。该概率接近了分类器的分类的边界概率0.5。Log-loss是一个软的分类准确率度量方法，使用概率来表示其所属的类别的置信度。Log-loss具体的数学表达式为：<script type="math/tex">log\_loss = -\frac{1}{N}\sum_{i=1}^{N}y_ilogp_i+(1-y_i)log(1-p_i)</script></p>
-<p>其中，\(y_i\)是指第i个样本所属的真实类别0或者1，\(p_i)表示第i个样本属于类别1的概率，这样上式中的两个部分对于每个样本只会选择其一，因为有一个一定为0，当预测与实际类别完全匹配时，则两个部分都是0，其中假定0log0=0。 </p>
+<h5 id="对数损失函数-Log-loss"><a href="#对数损失函数-Log-loss" class="headerlink" title="对数损失函数(Log-loss)"></a>对数损失函数(Log-loss)</h5><p>  在分类输出中，若输出不再是0-1，而是实数值，即属于每个类别的概率，那么可以使用Log-loss对分类结果进行评价。这个输出概率表示该记录所属的其对应的类别的置信度。比如如果样本本属于类别0，但是分类器则输出其属于类别1的概率为0.51，那么这种情况认为分类器出错了。该概率接近了分类器的分类的边界概率0.5。Log-loss是一个软的分类准确率度量方法，使用概率来表示其所属的类别的置信度。Log-loss具体的数学表达式为：</p>
+<script type="math/tex; mode=display">log\_loss = -\frac{1}{N}\sum_{i=1}^{N}y_ilogp_i+(1-y_i)log(1-p_i) ​</script><p>其中，\(y_i\)是指第i个样本所属的真实类别0或者1，\(p_i)表示第i个样本属于类别1的概率，这样上式中的两个部分对于每个样本只会选择其一，因为有一个一定为0，当预测与实际类别完全匹配时，则两个部分都是0，其中假定0log0=0。 </p>
 <p>  其实，从数学上来看，Log-loss的表达式是非常漂亮的。我们仔细观察可以发现，其信息论中的交叉熵(Cross Entropy，即真实值与预测值的交叉熵)，它与相对熵(Relative Entropy，也称为KL距离或KL散度， Kullback–Leibler divergence.)也非常像。信息熵是对事情的不确定性进行度量，不确定越大，熵越大。交叉熵包含了真实分布的熵加上假设与真实分布不同的分布的不确定性。因此，log-loss是对额外噪声(extra noise)的度量，这个噪声是由于预测值域实际值不同而产生的。因此最小化交叉熵，便是最大化分类器的准确率。</p>
 <h5 id="精确率-召回率-Precision-Recall"><a href="#精确率-召回率-Precision-Recall" class="headerlink" title="精确率-召回率(Precision-Recall)"></a>精确率-召回率(Precision-Recall)</h5><p>  精确率-召回率其实是两个评价指标。但是它们一般都是同时使用。精确率是指分类器分类正确的正样本的个数占该分类器所有分类为正样本个数的比例。召回率是指分类器分类正确的正样本个数占所有的正样本个数的比例。</p>
 <h5 id="F1-score："><a href="#F1-score：" class="headerlink" title="F1-score："></a>F1-score：</h5><p>  F1-score为精确率与召回率的调和平均值，它的值更接近于Precision与Recall中较小的值。即： </p>
@@ -511,14 +511,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
              
               <li class="article-tag-list-item">
